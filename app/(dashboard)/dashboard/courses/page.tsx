@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 import { Plus } from "lucide-react";
 import Link from "next/link";
 
-const breadcrumbItems = [{ title: "Employee", link: "/dashboard/employee" }];
+const breadcrumbItems = [{ title: "Courses", link: "/dashboard/courses" }];
 
 type paramsProps = {
   searchParams: {
@@ -32,34 +32,32 @@ export default async function page({ searchParams }: paramsProps) {
   const pageCount = Math.ceil(totalUsers / pageLimit);
   const employee: Employee[] = employeeRes.users;
   return (
-    <>
-      <div className="flex-1 space-y-4  p-4 md:p-8 pt-6">
-        <BreadCrumb items={breadcrumbItems} />
+    <div className="flex-1 space-y-4  p-4 md:p-8 pt-6">
+      <BreadCrumb items={breadcrumbItems} />
 
-        <div className="flex items-start justify-between">
-          <Heading
-            title={`Employee (${totalUsers})`}
-            description="Manage employees (Server side table functionalities.)"
-          />
-
-          <Link
-            href={"/dashboard/employee/new"}
-            className={cn(buttonVariants({ variant: "default" }))}
-          >
-            <Plus className="mr-2 h-4 w-4" /> Add New
-          </Link>
-        </div>
-        <Separator />
-
-        <DataTable
-          searchKey="country"
-          pageNo={page}
-          columns={columns}
-          totalUsers={totalUsers}
-          data={employee}
-          pageCount={pageCount}
+      <div className="flex items-start justify-between">
+        <Heading
+          title={`Courses (${totalUsers})`}
+          description="Manage courses "
         />
+
+        <Link
+          href={"/dashboard/courses/new"}
+          className={cn(buttonVariants({ variant: "default" }))}
+        >
+          <Plus className="mr-2 h-4 w-4" /> Add New
+        </Link>
       </div>
-    </>
+      <Separator />
+
+      <DataTable
+        searchKey="courses"
+        pageNo={page}
+        columns={columns}
+        totalUsers={totalUsers}
+        data={employee}
+        pageCount={pageCount}
+      />
+    </div>
   );
 }

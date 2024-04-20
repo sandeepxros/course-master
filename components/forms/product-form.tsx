@@ -1,23 +1,15 @@
 "use client";
-import * as z from "zod";
-import { useState } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { Trash } from "lucide-react";
-import { useParams, useRouter } from "next/navigation";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Separator } from "@/components/ui/separator";
 import { Heading } from "@/components/ui/heading";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -25,10 +17,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Separator } from "@/components/ui/separator";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Trash } from "lucide-react";
+import { useParams, useRouter } from "next/navigation";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
 // import FileUpload from "@/components/FileUpload";
-import { useToast } from "../ui/use-toast";
 import FileUpload from "../file-upload";
+import { useToast } from "../ui/use-toast";
 const ImgSchema = z.object({
   fileName: z.string(),
   name: z.string(),
@@ -166,7 +164,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
             name="imgUrl"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Images</FormLabel>
+                <FormLabel>Lable Image</FormLabel>
                 <FormControl>
                   <FileUpload
                     onChange={field.onChange}
@@ -184,11 +182,11 @@ export const ProductForm: React.FC<ProductFormProps> = ({
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel>Title</FormLabel>
                   <FormControl>
                     <Input
                       disabled={loading}
-                      placeholder="Product name"
+                      placeholder="Course name"
                       {...field}
                     />
                   </FormControl>
@@ -201,11 +199,12 @@ export const ProductForm: React.FC<ProductFormProps> = ({
               name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Description</FormLabel>
+                  <FormLabel>Short Description</FormLabel>
                   <FormControl>
                     <Input
+                      type="text"
                       disabled={loading}
-                      placeholder="Product description"
+                      placeholder="Short course description"
                       {...field}
                     />
                   </FormControl>
